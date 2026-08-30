@@ -10,7 +10,7 @@ import auth
 st.set_page_config(page_title="Laptop Price Predictor", page_icon="💻", layout="centered")
 
 # ---------------------------------------------------------------------------
-# Load trained model + dropdown options (cached so it only loads once)
+# Load trained model + dropdown options 
 # ---------------------------------------------------------------------------
 @st.cache_resource
 def load_model_and_options():
@@ -25,7 +25,7 @@ model, options = load_model_and_options()
 gpu_map = options["Gpu_map"]
 
 # ---------------------------------------------------------------------------
-# Session state: is the user logged in?
+# Session state
 # ---------------------------------------------------------------------------
 if "logged_in_user" not in st.session_state:
     st.session_state.logged_in_user = None
