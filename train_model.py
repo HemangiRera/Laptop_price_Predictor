@@ -17,7 +17,7 @@ print("Dataset shape:", df.shape)
 print("\nMissing values per column:\n", df.isnull().sum())
 
 # -------------------------------------------------------------------
-# 2. Basic EDA (printed to console — screenshot these for your report)
+# 2. Basic EDA 
 # -------------------------------------------------------------------
 print("\n--- Price statistics ---")
 print(df["Price"].describe())
@@ -44,10 +44,6 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 # -------------------------------------------------------------------
 # 4. Preprocessing + Model pipeline
-#    - Categorical columns -> OneHotEncoder
-#    - Numeric columns -> passed through as-is
-#    - Model -> RandomForestRegressor (handles non-linear relationships well,
-#      and needs very little tuning — good for a first ML project)
 # -------------------------------------------------------------------
 preprocessor = ColumnTransformer(transformers=[
     ("cat", OneHotEncoder(handle_unknown="ignore"), categorical_features),
@@ -82,7 +78,7 @@ print(f"R2 Score: {r2:.4f}   (closer to 1.0 is better)")
 print(f"MAE     : Rs. {mae:,.0f}   (average prediction error in rupees)")
 
 # -------------------------------------------------------------------
-# 7. Feature importance (which features matter most — good for viva!)
+# 7. Feature importance
 # -------------------------------------------------------------------
 ohe = pipeline.named_steps["preprocessor"].named_transformers_["cat"]
 ohe_feature_names = list(ohe.get_feature_names_out(categorical_features))
@@ -94,7 +90,7 @@ print("\n--- Top 10 most important features ---")
 print(feat_imp.head(10))
 
 # -------------------------------------------------------------------
-# 8. Save the trained pipeline (preprocessing + model together)
+# 8. Save the trained pipeline 
 # -------------------------------------------------------------------
 with open("laptop_price_model.pkl", "wb") as f:
     pickle.dump(pipeline, f)
