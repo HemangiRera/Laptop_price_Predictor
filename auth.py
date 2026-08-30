@@ -1,20 +1,3 @@
-"""
-auth.py
--------
-Small authentication helper used by login.py.
-
-Stores registered users in users.json as:
-{
-    "username1": {"password_hash": "...", "created_at": "2026-08-29 10:00:00"},
-    "username2": {...}
-}
-
-Passwords are NEVER stored as plain text — they're hashed with SHA-256
-before being written to disk. (For a real production app you'd use a
-slower, salted algorithm like bcrypt, but SHA-256 hashing is a reasonable
-and easy-to-explain step up from plain text for an academic project.)
-"""
-
 import json
 import os
 import hashlib
