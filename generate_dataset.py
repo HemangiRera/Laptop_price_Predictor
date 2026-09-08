@@ -17,8 +17,6 @@ cpu_weights = [0.15, 0.35, 0.25, 0.15, 0.10]
 gpu_brands = ["Intel Integrated", "AMD Radeon", "Nvidia GeForce"]
 gpu_weights = [0.45, 0.20, 0.35]
 
-# Specific GPU model names per brand, with a price premium for each
-# (higher-tier GPUs cost more, just like in real laptops).
 gpu_names_by_brand = {
     "Intel Integrated": {
         "Intel UHD Graphics": 0,
@@ -65,7 +63,7 @@ for _ in range(N):
     gpu_name = np.random.choice(list(gpu_options.keys()))
     os_ = np.random.choice(os_list, p=os_weights)
 
-    # ---- Realistic price logic (this is the "ground truth" formula) ----
+    # ---- Realistic price logic  ----
     # Base price
     price = 20000
 
@@ -79,7 +77,7 @@ for _ in range(N):
                      "Notebook": 0, "Netbook": -5000}
     price += type_premium[typename]
 
-    # RAM, storage, screen contribute directly
+    # RAM, storage, screen 
     price += ram * 900
     price += ssd * 12
     price += hdd * 2
@@ -93,16 +91,16 @@ for _ in range(N):
                     "AMD Ryzen 5": 7000, "AMD Ryzen 7": 15000}
     price += cpu_premium[cpu]
 
-    # GPU premium (specific model matters more than just brand)
+    # GPU premium
     price += gpu_options[gpu_name]
 
     # OS premium
     os_premium = {"Windows": 3000, "Mac": 0, "Linux": 0, "No OS": -3000}
     price += os_premium[os_]
 
-    # Random noise so the model has something real to learn (not a perfect formula)
+    # Random noise so the model has something real to learn 
     price += np.random.normal(0, 4000)
-    price = max(15000, round(price, -2))  # floor price, round to nearest 100
+    price = max(15000, round(price, -2)) 
 
     rows.append([company, typename, inches, ram, weight, touchscreen, ips, ppi,
                  cpu, hdd, ssd, gpu, gpu_name, os_, price])
