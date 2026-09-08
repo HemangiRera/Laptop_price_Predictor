@@ -47,7 +47,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 # -------------------------------------------------------------------
 preprocessor = ColumnTransformer(transformers=[
     ("cat", OneHotEncoder(handle_unknown="ignore"), categorical_features),
-], remainder="passthrough")  # numeric_features pass through unchanged
+], remainder="passthrough") 
 
 model = RandomForestRegressor(
     n_estimators=200,
@@ -94,13 +94,7 @@ print(feat_imp.head(10))
 # -------------------------------------------------------------------
 with open("laptop_price_model.pkl", "wb") as f:
     pickle.dump(pipeline, f)
-
-# Save the unique dropdown values too, so the GUI can build dropdowns
-# without needing the CSV at prediction time.
 dropdown_values = {col: sorted(df[col].unique().tolist()) for col in categorical_features}
-
-# Map each GPU brand to its list of specific model names, so the GUI can
-# show only the relevant GPU models once a brand is picked.
 gpu_map = (
     df[["Gpu_brand", "Gpu_name"]]
     .drop_duplicates()
